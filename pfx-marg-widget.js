@@ -315,7 +315,10 @@
 
     if (!event || event.target !== currencyTax.input) {
       currencyTax.label.innerHTML = `Курс (${relTax.name}):`;
-      currencyTax.value = relTax.value.toFixed(4);
+      const val = relTax.value.toString().replace(",", ".");
+      if (val.length - val.indexOf(".") - 1 < 4)
+        relTax.value = relTax.value.toFixed(4);
+      currencyTax.value = relTax.value;
     } else {
       relTax.value = currencyTax.value;
     }
